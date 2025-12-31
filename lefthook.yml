@@ -1,0 +1,9 @@
+pre-commit:
+  parallel: true
+  commands:
+    lint:
+      glob: "*.py"
+      run: flake8 {staged_files}
+    format:
+      glob: "*.py"
+      run: black --check {staged_files} && isort --check-only {staged_files}

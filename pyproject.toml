@@ -9,23 +9,22 @@ description = "Generic behavioral and architectural base library for enterprise 
 readme = "README.md"
 requires-python = ">=3.12"
 license = "MIT"
-authors = [
-    { name = "Paulo Junior", email = "pauulajunior@gmail.com" },
-]
-dependencies = [
-    "sqlalchemy>=2.0.0",
-]
+authors = [{ name = "Paulo Junior", email = "pauulajunior@gmail.com" }]
+dependencies = ["sqlalchemy>=2.0.0"]
 
 [project.urls]
 Homepage = "https://github.com/The-Band-Solution/libbase"
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=8.0.0",
-    "pytest-cov>=4.1.0",
-    "black>=24.0.0",
-    "flake8>=7.0.0",
-    "isort>=5.13.0",
+    "pytest",
+    "pytest-cov",
+    "black",
+    "flake8",
+    "isort",
+    "build",
+    "twine",
+    "lefthook",
 ]
 
 [tool.pytest.ini_options]
