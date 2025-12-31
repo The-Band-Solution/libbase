@@ -18,13 +18,27 @@
 - [x] GenericController[T] Facade
 - [x] Documentation Standardizing (v0.1.0)
 
+
+### ✅ Sprint 1: Foundation Standardization
+- **Goal**: Finalize library infrastructure, Agile governance, and documentation standards.
+- **Start Date**: 2025-12-31
+- **End Date**: 2026-01-14
+- **Focus**:
+    - CI/CD with real package publishing.
+    - Semantic Versioning automation.
+    - Agile templates and governance setup.
+
 ---
 
 ## Milestone: v0.2.0 - Advanced Querying & Async Support (Planned)
-**Goal**: Expand the repository capabilities to support complex filtering and asynchronous operations.
+**Goal**: Expand the repository capabilities to support complex filtering, pagination, and asynchronous operations.
 
-### Planned Tasks:
-- [ ] Specification Pattern for advanced queries.
-- [ ] AsyncSQLRepository implementation.
-- [ ] Pagination support in GenericService.
-- [ ] Enhanced error handling and custom exceptions.
+### 🏃 Sprint 1 (v0.2.0): Advanced Capabilities
+- **Start Date**: 2025-12-31
+- **End Date**: 2026-01-14
+- **Project**: The Band Project
+- **Tasks**:
+    - [ ] [Task] Implement Specification Pattern for Advanced Queries
+    - [ ] [Task] Implement AsyncSQLRepository
+    - [ ] [Task] Add Pagination Support
+    - [ ] [Task] Enhance Error Handling and Custom Exceptions
