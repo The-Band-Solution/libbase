@@ -12,6 +12,7 @@ Welcome to the **libbase** documentation folder.
 | **[specifications.md](specifications.md)** | **API Specifications**: Detailed component API and implementation guidelines. |
 | **[milestones.md](milestones.md)** | **Milestones & Sprints**: Project roadmap and delivery tracking. |
 | **[../CHANGELOG.md](../CHANGELOG.md)** | **Changelog**: Historical record of project changes and versions. |
+| **[MAINTENANCE.md](MAINTENANCE.md)** | **Maintenance Guide**: Context and instructions for future maintenance (AI-Ready). |
 
 ## ⚙️ Automation
 Project management and issue tracking are handled via GitHub Issues and Actions.
