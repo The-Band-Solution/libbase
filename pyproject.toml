@@ -19,5 +19,26 @@ dependencies = [
 [project.urls]
 Homepage = "https://github.com/The-Band-Solution/libbase"
 
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-cov>=4.1.0",
+    "black>=24.0.0",
+    "flake8>=7.0.0",
+    "isort>=5.13.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "--cov=libbase --cov-report=term-missing"
+
+[tool.black]
+line-length = 88
+target-version = ['py312']
+
+[tool.isort]
+profile = "black"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/libbase"]
