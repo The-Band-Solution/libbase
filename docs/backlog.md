@@ -1,10 +1,11 @@
 # Project Backlog - libbase
 
-This document is automatically synchronized with GitHub Issues. Last updated: 2025-12-31 18:15:53
+This document is automatically synchronized with GitHub Issues. Last updated: 2025-12-31 18:56:48
 
 ## 📋 Master Issue List
 | # | Status | Title | Executor | Sprint | Milestone |
 | :--- | :--- | :--- | :--- | :--- | :--- |
+| [#19](https://github.com/The-Band-Solution/libbase/issues/19) | 🟢 | Refactor: Expose public classes in __init__.py for cleaner imports | @paulossjunior | - | - |
 | [#18](https://github.com/The-Band-Solution/libbase/issues/18) | 🟢 | [Epic] Advanced Querying & Performance (v0.2.0) | - | - | - |
 | [#17](https://github.com/The-Band-Solution/libbase/issues/17) | 🟢 | [Task] Enhance Error Handling and Custom Exceptions | - | - | - |
 | [#16](https://github.com/The-Band-Solution/libbase/issues/16) | 🟢 | [Task] Add Pagination Support | - | - | - |
@@ -16,6 +17,7 @@ This document is automatically synchronized with GitHub Issues. Last updated: 20
 ## 📂 Workflow States
 
 ### 🟢 In Progress / Todo
+- [#19](https://github.com/The-Band-Solution/libbase/issues/19) **Refactor: Expose public classes in __init__.py for cleaner imports** (Executor: @paulossjunior)
 - [#18](https://github.com/The-Band-Solution/libbase/issues/18) **[Epic] Advanced Querying & Performance (v0.2.0)** (Executor: -)
 - [#17](https://github.com/The-Band-Solution/libbase/issues/17) **[Task] Enhance Error Handling and Custom Exceptions** (Executor: -)
 - [#16](https://github.com/The-Band-Solution/libbase/issues/16) **[Task] Add Pagination Support** (Executor: -)
@@ -24,17 +26,3 @@ This document is automatically synchronized with GitHub Issues. Last updated: 20
 
 ### ✅ Done / Released
 
-
----
-
-## [Epic] #18: Advanced Querying & Performance (v0.2.0) 🔄
-**Goal**: Expand capabilities with Async, Specifications, and Pagination.
-
-### [Sprint 1] Advanced Capabilities (2025-12-31 to 2026-01-14)
-- **[Task] #14**: Implement Specification Pattern for Advanced Queries
-- **[Task] #15**: Implement AsyncSQLRepository
-- **[Task] #16**: Add Pagination Support
-- **[Task] #17**: Enhance Error Handling and Custom Exceptions
-
----
-*Legend: ✅ = Completed | 🔄 = In Progress | 📋 = Planned*
