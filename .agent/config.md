@@ -26,3 +26,9 @@
 - Adhere to SemVer 2.0.0.
 - Minimal external dependencies.
 - Unified Domain/ORM models (DRY).
+
+## 📝 Governance Templates
+Use these patterns for all new issues:
+- **Epic**: [.agent/templates/epic.md](.agent/templates/epic.md)
+- **User Story**: [.agent/templates/user_story.md](.agent/templates/user_story.md)
+- **Task**: [.agent/templates/task.md](.agent/templates/task.md)
