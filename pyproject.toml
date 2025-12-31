@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "libbase"
+version = "0.1.0"
+description = "Generic behavioral and architectural base library for enterprise applications."
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [
+    { name = "Paulo Junior", email = "pauulajunior@gmail.com" },
+]
+dependencies = [
+    "sqlalchemy>=2.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/The-Band-Solution/libbase"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/libbase"]
