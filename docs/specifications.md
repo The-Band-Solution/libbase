@@ -1,80 +1,45 @@
-# specifications: eo_lib
+# Generic Specifications - libbase
 
-## 1. Database Schema
+## 1. Storage Guidelines
 
-### Table: `persons`
-| Column | Type | Constraints | Description |
-| :--- | :--- | :--- | :--- |
-| `id` | `INTEGER` | `PK`, `AUTO` | Unique Identifier |
-| `name` | `VARCHAR(100)` | `NOT NULL` | Full Name |
-| `identification_id` | `VARCHAR(50)` | `UNIQUE` | Personal Identification Card |
-| `birthday` | `DATE` | | Date of Birth |
-| `created_at` | `TIMESTAMP` | `DEFAULT NOW()` | Record creation time |
+### 1.1 SQL Strategy (SQLAlchemy)
+The `GenericSqlRepository` expects a SQLAlchemy declarative model mapped to a table with at least an `id` column.
+- **Table Naming**: Flexible, determined by the consumer's model.
+- **Primary Key**: Must support common types (Int, UUID, String).
 
-### Table: `person_emails`
-| Column | Type | Constraints | Description |
-| :--- | :--- | :--- | :--- |
-| `id` | `INTEGER` | `PK`, `AUTO` | Unique Identifier |
-| `person_id` | `INTEGER` | `FK(persons.id)`, `NOT NULL` | Owner of the email |
-| `email` | `VARCHAR(255)` | `UNIQUE`, `NOT NULL` | Email Address |
+### 1.2 JSON Strategy
+- **File Structure**: A root dictionary where keys are entity IDs and values are serialized entity data.
+- **Serialization**: Uses `dataclasses.asdict` by default.
 
-### Table: `teams`
-| Column | Type | Constraints | Description |
-| :--- | :--- | :--- | :--- |
-| `id` | `INTEGER` | `PK`, `AUTO` | Unique Identifier |
-| `name` | `VARCHAR(100)` | `UNIQUE`, `NOT NULL` | Team Name |
-| `description` | `TEXT` | | Optional description |
+## 2. Public API Specifications
 
-### Table: `team_members`
-| Column | Type | Constraints | Description |
-| :--- | :--- | :--- | :--- |
-| `id` | `INTEGER` | `PK`, `AUTO` | Unique Identifier |
-| `person_id` | `INTEGER` | `FK(persons.id)` | Link to Person |
-| `team_id` | `INTEGER` | `FK(teams.id)` | Link to Team |
-| `role` | `VARCHAR(50)` | `NOT NULL`, `DEFAULT 'member'` | Role in team |
-| `start_date` | `DATE` | `NOT NULL`, `DEFAULT NOW()` | Membership start |
-| `end_date` | `DATE` | `NULLABLE` | Membership end |
+### Class: `GenericController[T]`
+Provides a simplified entry point for CRUD operations.
+- `create(entity: T) -> None`
+- `get_by_id(entity_id: any) -> Optional[T]`
+- `get_all() -> List[T]`
+- `update(entity: T) -> None`
+- `delete(entity_id: any) -> None`
 
-### Table: `projects`
-| Column | Type | Constraints | Description |
-| :--- | :--- | :--- | :--- |
-| `id` | `INTEGER` | `PK`, `AUTO` | Unique Identifier |
-| `name` | `VARCHAR(100)` | `UNIQUE`, `NOT NULL` | Project Name |
-| `description` | `TEXT` | | Optional description |
-| `start_date` | `TIMESTAMP` | | Projected start date |
-| `end_date` | `TIMESTAMP` | | Projected end date |
-| `status` | `VARCHAR(20)` | `DEFAULT 'active'` | Status |
+### Class: `GenericService[T]`
+Coordinates business logic and acts as a bridge between the Controller and Repository.
+- `create(entity: T) -> None`
+- `get_by_id(id: any) -> Optional[T]`
+- `get_all() -> List[T]`
+- `update(entity: T) -> None`
+- `delete(id: any) -> None`
 
-### Table: `project_teams`
-| Column | Type | Constraints | Description |
-| :--- | :--- | :--- | :--- |
-| `project_id` | `INTEGER` | `FK(projects.id)`, `PK` | Project Link |
-| `team_id` | `INTEGER` | `FK(teams.id)`, `PK` | Team Link |
+### Interface: `IRepository[T]`
+The base contract for all persistence implementations.
+- `add(entity: T) -> None`
+- `get_by_id(entity_id: any) -> Optional[T]`
+- `get_all() -> List[T]`
+- `update(entity: T) -> None`
+- `delete(entity_id: any) -> None`
 
-## 2. API Specifications (Public Interface)
-
-### Class: `PersonController`
-- `create_person(name: str, emails: list[str] = None, identification_id: str = None, birthday: date = None) -> Person`
-- `get_person(id: int) -> Person`
-- `update_person(id: int, name: str = None, emails: list[str] = None, identification_id: str = None, birthday: date = None) -> Person`
-- `delete_person(id: int) -> None`
-- `list_persons() -> list[Person]`
-
-### Class: `TeamController`
-- `create_team(name: str, description: str) -> Team`
-- `get_team(id: int) -> Team`
-- `update_team(id: int, name: str = None, description: str = None) -> Team`
-- `delete_team(id: int) -> None`
-- `list_teams() -> list[Team]`
-- `add_member(team_id: int, person_id: int, role: str, start_date: date = None, end_date: date = None) -> TeamMember`
-- `remove_member(member_id: int) -> None`
-- `get_members(team_id: int) -> list[TeamMember]`
-
-### Class: `ProjectController`
-- `create_project(name: str, description: str = None, start_date = None, end_date = None) -> Project`
-- `get_project(id: int) -> Project) -> Project`
-- `update_project(id: int, name: str = None, status: str = None, description: str = None, start_date = None, end_date = None) -> Project`
-- `delete_project(id: int) -> None`
-- `list_projects() -> list[Project]`
-- `assign_team(project_id: int, team_id: int) -> void`
-- `get_teams(project_id: int) -> list[Team]`
+## 3. Extension Guidelines
+To use `libbase` for a specific entity (e.g., `User`):
+1.  Define a class inheriting from `libbase.domain.base.BaseEntity`.
+2.  Initialize the desired Repository (e.g., `GenericSqlRepository(session, User)`).
+3.  Inject the Repository into the `GenericService[User]`.
+4.  Optionally use `GenericController[User]` as the public entry point.

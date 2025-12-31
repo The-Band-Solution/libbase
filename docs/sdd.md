@@ -1,249 +1,102 @@
-# Software Design Description (SDD)
+# Software Design Description (SDD) - libbase
 
 ## 1. Solution Architecture
 
 ### 1.1 Architectural Pattern
-The system follows a **Strict Layered Architecture** emphasizing separation of concerns, testability, and flexibility. It integrates **MVC (Model-View-Controller)** principles with **Domain-Driven Design (DDD)** tactical patterns.
+`libbase` follows a **Strict Layered Architecture** designed to provide a reusable foundation for enterprise applications. It decouples domain logic from persistence mechanisms using the **Generic Repository Pattern**.
 
 | Layer | Component | Responsibility |
 |-------|-----------|----------------|
-| **Presentation** | **Controllers** | Acts as a Facade/Entry Point. Handles user input, delegates to Services, and formats responses (DTOs/Entities). |
-| **Business Logic** | **Services** | Encapsulates domain business rules. Orchestrates data flow between Controllers and Repositories. |
-| **Data Access** | **Repositories** | Abstracts the storage mechanism. Provides a clean interface for Domain operations (CRUD+L). implemented using the **Generic Repository Pattern**. |
-| **Persistence** | **Strategies** | Concrete implementations of storage: `SQLAlchemy`, `JSON File`, or `In-Memory`. Selected via **Strategy Pattern**. |
-| **Domain** | **Unified Models** | **DRY Principle**: Entities serve as both Domain Objects and ORM Mappings (SQLAlchemy Declarative). |
+| **Presentation** | **Controllers** | Acts as a Facade/Entry Point. Coordinates requests and delegates to services. |
+| **Business Logic** | **Services** | Orchestrates business logic and repository interactions. |
+| **Data Access** | **Repositories** | Abstracts storage via `IRepository[T]`. Implemented using strategies. |
+| **Persistence** | **Strategies** | Concrete storage: `SQLAlchemy`, `JSON File`, or `In-Memory`. |
+| **Domain** | **Base Entities** | Core definitions like `BaseEntity` used as the foundation for domain models. |
 
 ### 1.2 Design Patterns
-- **Strategy Pattern**: Used to switch between Database, JSON, and Memory storage at runtime via Configuration.
-- **Generic Repository**: Defines generic `add`, `get`, `update`, `delete`, `list` operations in an abstract base class to eliminate boilerplate.
-- **Factory Pattern**: `ServiceFactory` handles dependency injection, wiring Services with the correct Repository Strategy.
-- **Singleton Pattern**: The `PostgresClient` ensures a single global database connection pool.
+- **Strategy Pattern**: Enables switching between different storage backends (SQL, JSON, Memory) without changing business logic.
+- **Generic Repository**: Provides a standardized CRUD interface (`add`, `get_by_id`, `get_all`, `update`, `delete`) for any entity.
+- **Facade Pattern**: Controllers provide a simplified public interface to the underlying complex service and repository layers.
+- **Dependency Injection**: Services and Controllers receive their dependencies (repositories/services) via initialization, promoting testability.
 
-## 2. Data Design (IEEE 1016)
+## 2. Component Design
 
-### 2.1 Mini-World Scenario
-The system models a corporate environment where human resources are managed through **Persons**, **Teams**, and **Projects**.
-- A **Person** represents an individual acting within the organization. They can have multiple email addresses.
-- A **Team** is a permanent or semi-permanent collection of individuals working together.
-- A **TeamMember** represents the association of a Person to a Team, characterized by a specific `role` (e.g., "Developer", "Lead") and a strict time period (`start_date` to `end_date`).
-- A **Project** is a specific undertaking or product with a specific lifecycle (`start_date` to `end_date`). Teams (not individual persons) are assigned to Projects. This implies that if a Project requires resources, it acquires them by allocating entire Teams.
-
-### 2.2 Data Dictionary
-
-#### 2.2.1 Person
-| Attribute | Type | Constraints | Description |
-|-----------|------|-------------|-------------|
-| `id` | Integer | PK, Auto-Inc | Unique internal identifier for the person. |
-| `name` | String | Not Null | The full legal name of the person. |
-| `identification_id` | String | Unique | Personal identification card / tax ID. |
-| `birthday` | Date | Optional | The date of birth. |
-
-#### 2.2.2 PersonEmail
-| Attribute | Type | Constraints | Description |
-|-----------|------|-------------|-------------|
-| `id` | Integer | PK, Auto-Inc | Unique identifier for the email record. |
-| `person_id` | Integer | FK (Person) | Reference to the Person owner. |
-| `email` | String | Unique, Not Null | The email address. |
-
-#### 2.2.2 Team
-| Attribute | Type | Constraints | Description |
-|-----------|------|-------------|-------------|
-| `id` | Integer | PK, Auto-Inc | Unique internal identifier for the team. |
-| `name` | String | Unique, Not Null | The official name of the team (e.g., "Alpha Squad"). |
-| `description`| Text | Optional | A detailed description of the team's purpose. |
-
-#### 2.2.3 TeamMember (Association Entity)
-| Attribute | Type | Constraints | Description |
-|-----------|------|-------------|-------------|
-| `id` | Integer | PK, Auto-Inc | Unique identifier for the membership record. |
-| `person_id` | Integer | FK (Person) | Reference to the Person. |
-| `team_id` | Integer | FK (Team) | Reference to the Team. |
-| `role` | String | Default "member" | The functional role of the person within this specific team. |
-| `start_date` | Date | Default NOW | Date when the person joined the team. |
-| `end_date` | Date | Nullable | Date when the person left the team. Open interval if null. |
-
-#### 2.2.4 Project
-| Attribute | Type | Constraints | Description |
-|-----------|------|-------------|-------------|
-| `id` | Integer | PK, Auto-Inc | Unique internal identifier for the project. |
-| `name` | String | Unique, Not Null | The code name or label of the project. |
-| `description` | Text | Optional | Detailed project description. |
-| `start_date` | Date | Optional | Projected start date. |
-| `end_date` | Date | Optional | Projected end date. |
-| `status` | String | Default "active" | Valid values: active, completed, archived. |
-
-#### 2.2.5 Implementation Strategy
-The entities are implemented using **SQLAlchemy Declarative Models** inheriting from a shared `Base`. This provides a direct mapping between the classes described above and the underlying Relational Database Schema, ensuring the DRY principle is respected.
-
-## 3. Class Diagrams
-
-### 3.1 Domain Model Class Diagram
-This diagram illustrates the core entities and their relationships within the domain layer.
+### 2.1 Generic Repository Interface
+The `IRepository[T]` interface defines the contract for all persistence operations.
 
 ```mermaid
 classDiagram
-    %% Entities
-    class Person {
-        +int id
-        +str name
-        +str identification_id
-        +date birthday
-        +list[PersonEmail] emails
+    class IRepository~T~ {
+        <<interface>>
+        +add(entity: T)
+        +get_by_id(id: any) T?
+        +get_all() List~T~
+        +update(entity: T)
+        +delete(id: any)
     }
-
-    class PersonEmail {
-        +int id
-        +int person_id
-        +str email
-    }
-
-    class Team {
-        +int id
-        +str name
-        +list[TeamMember] members
-    }
-
-    class TeamMember {
-        +int id
-        +int person_id
-        +int team_id
-        +str role
-        +date start_date
-        +date end_date
-    }
-    
-    class Project {
-        +int id
-        +str name
-        +str description
-        +date start_date
-        +date end_date
-        +list[Team] teams
-    }
-
-    %% Relationships
-    Person "1" --> "N" PersonEmail : Has
-    Person "1" --> "N" TeamMember : Belongs to
-    Team "1" --> "N" TeamMember : Contains
-    Team "N" -- "M" Project : Assigned to
 ```
 
-### 3.2 Architecture Class Diagram
-This diagram showcases the strict layered architecture, highlighting the flow from Controllers to Services and finally to Repositories.
+### 2.2 Storage Strategies
+`libbase` provides three primary implementations of the repository interface:
+1.  **GenericMemoryRepository**: Stores entities in a local dictionary. Ideal for unit tests.
+2.  **GenericJsonRepository**: Serializes entities to a JSON file. Useful for lightweight data storage.
+3.  **GenericSqlRepository**: Uses SQLAlchemy for relational database persistence.
+
+## 3. Class Hierarchy
 
 ```mermaid
 classDiagram
-    %% Layers
-    namespace Presentation {
-        class PersonController
-        class TeamController
-        class ProjectController
-    }
-    
-    namespace Business_Logic {
-        class PersonService
-        class TeamService
-        class ProjectService
-    }
-    
-    namespace Data_Access {
-        class PersonRepository
-        class TeamRepository
-        class ProjectRepository
-    }
-    
-    namespace Domain {
-        class Person
-        class Team
-        class Project
+    class BaseEntity {
+        +any id
     }
 
-    %% Dependencies
-    PersonController --|> PersonService : uses
-    TeamController --|> TeamService : uses
-    ProjectController --|> ProjectService : uses
-    
-    PersonService --|> PersonRepository : uses
-    TeamService --|> TeamRepository : uses
-    ProjectService --|> ProjectRepository : uses
+    class IRepository~T~ {
+        <<interface>>
+    }
 
-    %% Entities flow through all layers
-    PersonController ..> Person : handles
-    PersonService ..> Person : processes
-    PersonRepository ..> Person : persists
+    class GenericMemoryRepository~T~
+    class GenericJsonRepository~T~
+    class GenericSqlRepository~T~
 
-    TeamController ..> Team : handles
-    TeamService ..> Team : processes
-    TeamRepository ..> Team : persists
-    TeamRepository ..> Person : manages membership
+    IRepository <|.. GenericMemoryRepository : implements
+    IRepository <|.. GenericJsonRepository : implements
+    IRepository <|.. GenericSqlRepository : implements
 
-    ProjectController ..> Project : handles
-    ProjectService ..> Project : processes
-    ProjectRepository ..> Project : persists
-    ProjectRepository ..> Team : manages assignment
+    class GenericService~T~ {
+        -IRepository~T~ repository
+        +create(entity: T)
+        +get_by_id(id: any) T?
+        +get_all() List~T~
+        +update(entity: T)
+        +delete(id: any)
+    }
+
+    class GenericController~T~ {
+        -GenericService~T~ service
+        +create(entity: T)
+        +get_by_id(id: any) T?
+        +get_all() List~T~
+        +update(entity: T)
+        +delete(id: any)
+    }
+
+    GenericService --> IRepository : uses
+    GenericController --> GenericService : uses
 ```
 
-### 3.3 Package Model Diagram
-The following diagram illustrates the dependencies between the logical packages (folders) of the library. It clearly shows the **One-Way Dependency Rule**: Outer layers depend on inner layers, and the Domain remains the independent core.
-
-```mermaid
-classDiagram
-    direction TB
-    
-    namespace eo_lib_controllers {
-        class Controllers ["eo_lib.controllers"]
-    }
-    
-    namespace eo_lib_services {
-        class Services ["eo_lib.services"]
-    }
-    
-    namespace eo_lib_domain {
-        class Domain ["eo_lib.domain"]
-    }
-    
-    namespace eo_lib_infrastructure {
-        class Infrastructure ["eo_lib.infrastructure"]
-    }
-    
-    namespace eo_lib_root {
-        class Factories ["eo_lib.factories"]
-        class Config ["eo_lib.config"]
-    }
-
-    Controllers ..> Services : orchestrates
-    Controllers ..> Domain : uses entities
-    Controllers ..> Factories : uses for DB-independent init
-    
-    Services ..> Domain : implements business logic using
-    
-    Infrastructure ..> Domain : implements repository interfaces
-    Infrastructure ..> Config : reads settings
-    
-    Factories ..> Services : wires
-    Factories ..> Infrastructure : selects strategy
-    Factories ..> Config : reads storage type
-```
-
-## 4. Sequence Diagram: Add Member to Team
+## 4. Execution Flow (CRUD)
 
 ```mermaid
 sequenceDiagram
-    autonumber
-    actor Client
-    participant Controller as TeamController
-    participant Service as TeamService
-    participant TeamRepo as PostgresTeamRepo
-    participant DB as PostgreSQL
+    participant C as GenericController[T]
+    participant S as GenericService[T]
+    participant R as IRepository[T]
+    participant ST as StorageStrategy
 
-    Client->>Controller: add_member(team_id, person_id, role)
-    Controller->>Service: add_member(team_id, person_id, role)
-    
-    Service->>TeamRepo: add_member(TeamMember)
-    TeamRepo->>DB: INSERT INTO team_members ...
-    DB-->>TeamRepo: Success
-    TeamRepo-->>Service: TeamMember(id=...)
-    
-    Service-->>Controller: TeamMemberDTO
-    Controller-->>Client: TeamMemberDTO
+    C->>S: create(entity)
+    S->>R: add(entity)
+    R->>ST: Persist Data
+    ST-->>R: Success
+    R-->>S: void
+    S-->>C: void
 ```

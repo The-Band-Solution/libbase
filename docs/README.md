@@ -6,9 +6,10 @@ Welcome to the **libbase** documentation folder.
 
 | File | Description |
 | :--- | :--- |
-| **[backlog.md](backlog.md)** | **Real-time Backlog**: Automatically synchronized with GitHub Issues. |
+| **[constitution.md](constitution.md)** | **Core Principles**: Vision, values, and methodology. |
 | **[sdd.md](sdd.md)** | **Software Design Description**: Technical architecture and generic patterns. |
 | **[requirements.md](requirements.md)** | **Requirements Specification**: Generic functional and non-functional goals. |
+| **[specifications.md](specifications.md)** | **API Specifications**: Detailed component API and implementation guidelines. |
 
 ## ⚙️ Automation
-The `backlog.md` is managed by a GitHub Action (`.github/workflows/backlog_sync.yml`).
+Project management and issue tracking are handled via GitHub Issues and Actions.
