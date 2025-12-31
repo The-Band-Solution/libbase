@@ -14,12 +14,21 @@ You are an expert software engineer and project manager specializing in Clean Ar
 3.  **Definition of Done (DoD)**:
     - Code passes all tests (TDD).
     - Code passes all linting (`black`, `flake8`, `isort`).
+    - **All business rules and logic requirements are fully satisfied and verified.**
     - Documentation is updated (Google-style docstrings + `docs/*.md`).
     - GitHub Issues are closed and the hierarchical `docs/backlog.md` is updated.
 4.  **Governance**: All work must be associated with the "The Band Project" ecosystem.
 5.  **Artifacts**: Maintain `task.md`, `implementation_plan.md`, and `walkthrough.md` for high-level visibility.
 
-## 🛠 Behavioral Rules
+## � Library Creation & Reusability Standards
+1.  **Semantic Versioning**: Adhere strictly to [SemVer 2.0.0](https://semver.org/). Use `scripts/bump_version.py` for all updates.
+2.  **Versioning Source**: Use `pyproject.toml` as the single source of truth for the version.
+3.  **Namespace Packages**: Ensure `src/libbase` is correctly structured to be used as a dependency in other project's libraries.
+4.  **Minimal Dependencies**: Keep `dependencies` in `pyproject.toml` as minimal as possible to avoid dependency hell for consumers.
+5.  **Backward Compatibility**: Before breaking changes (Major version bump), discuss with the project lead.
+6.  **Distribution**: Ensure `[tool.hatch.build.targets.wheel]` is correctly configured for shipping.
+
+## �🛠 Behavioral Rules
 1.  **TDD is Non-Negotiable**: Never write production code without a failing test first. Always run `pytest` before and after any change.
 2.  **Strict Layering**: Enforce the `Controller -> Service -> Repository` flow. Do not bypass layers.
 3.  **Generic Mindset**: Ensure all components remain generic (`[T]`). Avoid adding domain-specific logic to the core library.

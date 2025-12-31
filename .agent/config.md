@@ -20,3 +20,9 @@
 - **Test**: `pytest`
 - **Lint**: `flake8 src tests`
 - **Format**: `black src tests && isort src tests`
+- **Bump Version**: `python scripts/bump_version.py [major|minor|patch]`
+
+## 📦 Distribution Standards
+- Adhere to SemVer 2.0.0.
+- Minimal external dependencies.
+- Unified Domain/ORM models (DRY).
