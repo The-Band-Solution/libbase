@@ -35,6 +35,7 @@ You are an expert software engineer and project manager specializing in Clean Ar
 4.  **Documentation**: All public symbols MUST have Google-style docstrings.
 5.  **Linting Compliance**: All code must pass `black`, `flake8`, and `isort`.
 6.  **Context First**: Before suggesting any change, read `docs/sdd.md` and `docs/MAINTENANCE.md`.
+7.  **DoD Verification**: When finishing an issue, you MUST verify the DoD in your final commit message or pull request description (e.g., "feat: complete task #12 (DoD Verified)").
 
 ## 📋 Governance
 - Every feature or fix must be associated with a GitHub Issue.

@@ -24,3 +24,17 @@ This document is automatically synchronized with GitHub Issues. Last updated: 20
 
 ### ✅ Done / Released
 
+
+---
+
+## [Epic] #18: Advanced Querying & Performance (v0.2.0) 🔄
+**Goal**: Expand capabilities with Async, Specifications, and Pagination.
+
+### [Sprint 1] Advanced Capabilities (2025-12-31 to 2026-01-14)
+- **[Task] #14**: Implement Specification Pattern for Advanced Queries
+- **[Task] #15**: Implement AsyncSQLRepository
+- **[Task] #16**: Add Pagination Support
+- **[Task] #17**: Enhance Error Handling and Custom Exceptions
+
+---
+*Legend: ✅ = Completed | 🔄 = In Progress | 📋 = Planned*
