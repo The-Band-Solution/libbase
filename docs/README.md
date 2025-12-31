@@ -10,6 +10,7 @@ Welcome to the **libbase** documentation folder.
 | **[sdd.md](sdd.md)** | **Software Design Description**: Technical architecture and generic patterns. |
 | **[requirements.md](requirements.md)** | **Requirements Specification**: Generic functional and non-functional goals. |
 | **[specifications.md](specifications.md)** | **API Specifications**: Detailed component API and implementation guidelines. |
+| **[milestones.md](milestones.md)** | **Milestones & Sprints**: Project roadmap and delivery tracking. |
 
 ## ⚙️ Automation
 Project management and issue tracking are handled via GitHub Issues and Actions.

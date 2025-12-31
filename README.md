@@ -12,8 +12,15 @@ Deliver a standardized, robust, and well-tested architectural foundation for Pyt
 - **TDD-Ready**: Built following Test-Driven Development principles with 100% test focus.
 
 ## 🚀 Installation
+
+### Stable Release (v0.1.0)
 ```bash
-pip install git+https://github.com/The-Band-Solution/libbase.git
+pip install git+https://github.com/The-Band-Solution/libbase.git@v0.1.0
+```
+
+### Development Version
+```bash
+pip install git+https://github.com/The-Band-Solution/libbase.git@main
 ```
 
 ## 📚 Documentation
