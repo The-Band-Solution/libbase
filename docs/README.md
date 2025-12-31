@@ -11,6 +11,7 @@ Welcome to the **libbase** documentation folder.
 | **[requirements.md](requirements.md)** | **Requirements Specification**: Generic functional and non-functional goals. |
 | **[specifications.md](specifications.md)** | **API Specifications**: Detailed component API and implementation guidelines. |
 | **[milestones.md](milestones.md)** | **Milestones & Sprints**: Project roadmap and delivery tracking. |
+| **[../CHANGELOG.md](../CHANGELOG.md)** | **Changelog**: Historical record of project changes and versions. |
 
 ## ⚙️ Automation
 Project management and issue tracking are handled via GitHub Issues and Actions.
