@@ -1,10 +1,11 @@
 # Project Backlog - libbase
 
-This document is automatically synchronized with GitHub Issues. Last updated: 2025-12-31 18:10:05
+This document is automatically synchronized with GitHub Issues. Last updated: 2025-12-31 18:10:31
 
 ## 📋 Master Issue List
 | # | Status | Title | Executor | Sprint | Milestone |
 | :--- | :--- | :--- | :--- | :--- | :--- |
+| [#18](https://github.com/The-Band-Solution/libbase/issues/18) | 🟢 | [Epic] Advanced Querying & Performance (v0.2.0) | - | - | - |
 | [#17](https://github.com/The-Band-Solution/libbase/issues/17) | 🟢 | [Task] Enhance Error Handling and Custom Exceptions | - | - | - |
 | [#16](https://github.com/The-Band-Solution/libbase/issues/16) | 🟢 | [Task] Add Pagination Support | - | - | - |
 | [#15](https://github.com/The-Band-Solution/libbase/issues/15) | 🟢 | [Task] Implement AsyncSQLRepository | - | - | - |
@@ -15,6 +16,7 @@ This document is automatically synchronized with GitHub Issues. Last updated: 20
 ## 📂 Workflow States
 
 ### 🟢 In Progress / Todo
+- [#18](https://github.com/The-Band-Solution/libbase/issues/18) **[Epic] Advanced Querying & Performance (v0.2.0)** (Executor: -)
 - [#17](https://github.com/The-Band-Solution/libbase/issues/17) **[Task] Enhance Error Handling and Custom Exceptions** (Executor: -)
 - [#16](https://github.com/The-Band-Solution/libbase/issues/16) **[Task] Add Pagination Support** (Executor: -)
 - [#15](https://github.com/The-Band-Solution/libbase/issues/15) **[Task] Implement AsyncSQLRepository** (Executor: -)
