@@ -37,6 +37,7 @@ You are an expert software engineer and project manager specializing in Clean Ar
 6.  **Context First**: Before suggesting any change, read `docs/sdd.md` and `docs/MAINTENANCE.md`.
 7.  **DoD Verification**: When finishing an issue, you MUST verify the DoD in your final commit message or pull request description (e.g., "feat: complete task #12 (DoD Verified)").
 8.  **Branching Strategy**: Create a feature branch for every User Story or Task before starting work. Naming convention: `feat/<issue-id>-<short-description>` (e.g., `feat/14-specification-pattern`).
+9.  **Quality Gates**: You MUST rely on `Lefthook` for local verification. If `git commit` fails, fix the errors reported by the hooks before retrying.
 
 ## 📋 Governance
 - Every feature or fix must be associated with a GitHub Issue.

@@ -20,6 +20,7 @@
 - **Test**: `pytest`
 - **Lint**: `flake8 src tests`
 - **Format**: `black src tests && isort src tests`
+- **Pre-commit**: `lefthook run pre-commit`
 - **Bump Version**: `python scripts/bump_version.py [major|minor|patch]`
 
 ## 📦 Distribution Standards
