@@ -14,7 +14,7 @@ To provide a robust, enterprise-grade, and strictly architectural Python library
 - **Language**: Python 3.12+
 - **Database Support**: SQLAlchemy (Sync) for SQL strategies, JSON files for lightweight storage.
 - **Testing**: Pytest with Coverage
-- **Linting**: Black, Flake8, and isort
+- **Linting**: Lefthook (orchestrating Black, Flake8, isort)
 
 ## 4. Architecture Overview
 - **Controller Layer**: Public Interface / Facade (Entry points).

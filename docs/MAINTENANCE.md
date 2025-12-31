@@ -19,7 +19,7 @@ This document serves as a "Universal Context" for any developer or AI coding ass
 - **Python**: 3.12+ (managed via `pyproject.toml`).
 - **TDD Requirement**: **All changes must be driven by tests first.** No code is written without a corresponding test in `tests/`.
 - **Documentation**: Google-style docstrings are mandatory for all classes and methods.
-- **Code Style**: Strictly enforced by `black`, `flake8` (max-line-length: 88), and `isort`.
+- **Code Style**: Strictly enforced by **Lefthook** (black, flake8, isort). Run `lefthook run pre-commit` locally.
 - **CI/CD**: GitHub Actions handle automated verification and tagging.
 
 ---
@@ -38,7 +38,7 @@ If you are an AI assistant helping with this project, follow these instructions:
 1.  **Context Loading**: Start by reading `docs/constitution.md`, `docs/sdd.md`, and `docs/specifications.md`.
 2.  **TDD First**: Always check `tests/` before modifying `src/`. Propose tests before implementation.
 3.  **Governance**: When starting a new feature, check `docs/backlog.md`. If a task doesn't exist, ask the user to create a GitHub Issue (or create one yourself if allowed).
-4.  **Issue Association**: Every commit should ideally relate to a GitHub Issue (e.g., `feat: implementation #12`).
+4.  **Issue Association**: Every commit MUST relate to a GitHub Issue. Final commit MUST include "(DoD Verified)".
 5.  **Documentation**: Keep all documentation in `docs/` synchronized with code changes.
 
 ---

@@ -23,6 +23,12 @@ pip install git+https://github.com/The-Band-Solution/libbase.git@v0.1.0
 pip install git+https://github.com/The-Band-Solution/libbase.git@main
 ```
 
+## 🤝 Contributing
+Please read [docs/MAINTENANCE.md](docs/MAINTENANCE.md) for detailed instructions on:
+- **Quality Gates**: Using `Lefthook`.
+- **Governance**: Creating Epics, Stories, and Tasks.
+- **Standards**: TDD and DoD Verification.
+
 ## 📚 Documentation
 Comprehensive documentation is available in the `docs/` folder:
 - [Constitution](docs/constitution.md): Project vision and principles.
