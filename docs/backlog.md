@@ -1,28 +1,24 @@
 # Project Backlog - libbase
 
-This backlog documents the hierarchical relationship between Epics, User Stories, and Tasks managed within the `libbase` project.
+This document is automatically synchronized with GitHub Issues. Last updated: 2025-12-31 18:10:05
 
-## [Epic] #1: Generic Core Architecture - CRUD Foundation ✅
-**Goal**: Establish the core architectural patterns for generic CRUD operations.
-
-### [US] #2: Generic Repository with Multi-Storage Strategy ✅
-- **[Task] #5**: IRepository Interface Definition
-- **[Task] #6**: GenericMemoryRepository Implementation
-- **[Task] #7**: GenericSqlRepository (SQLAlchemy) Implementation
-- **[Task] #8**: GenericJsonRepository (File-based) Implementation
-
-### [US] #3: Generic Service and Controller Facades ✅
-- **[Task] #9**: GenericService[T] CRUD logic coordination
-- **[Task] #10**: GenericController[T] facade implementation
-
-### [US] #4: TDD Infrastructure and CI/CD for Core ✅
-- **[Task] #11**: Setup Pytest, Coverage, and Linting (Black/Flake8)
-- **[Task] #12**: Setup GitHub Actions CI/CD pipeline
+## 📋 Master Issue List
+| # | Status | Title | Executor | Sprint | Milestone |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| [#17](https://github.com/The-Band-Solution/libbase/issues/17) | 🟢 | [Task] Enhance Error Handling and Custom Exceptions | - | - | - |
+| [#16](https://github.com/The-Band-Solution/libbase/issues/16) | 🟢 | [Task] Add Pagination Support | - | - | - |
+| [#15](https://github.com/The-Band-Solution/libbase/issues/15) | 🟢 | [Task] Implement AsyncSQLRepository | - | - | - |
+| [#14](https://github.com/The-Band-Solution/libbase/issues/14) | 🟢 | [Task] Implement Specification Pattern for Advanced Queries | - | - | - |
 
 ---
 
-## Standalone / Management Tasks
-- **[Task] #13**: Standardize and Generalize all Documentation ✅
+## 📂 Workflow States
 
----
-*Legend: ✅ = Completed | 🔄 = In Progress | 📋 = Planned*
+### 🟢 In Progress / Todo
+- [#17](https://github.com/The-Band-Solution/libbase/issues/17) **[Task] Enhance Error Handling and Custom Exceptions** (Executor: -)
+- [#16](https://github.com/The-Band-Solution/libbase/issues/16) **[Task] Add Pagination Support** (Executor: -)
+- [#15](https://github.com/The-Band-Solution/libbase/issues/15) **[Task] Implement AsyncSQLRepository** (Executor: -)
+- [#14](https://github.com/The-Band-Solution/libbase/issues/14) **[Task] Implement Specification Pattern for Advanced Queries** (Executor: -)
+
+### ✅ Done / Released
+
